@@ -1,0 +1,106 @@
+<div class="container searchContainer">
+  <div class="row">
+    <div class="col-md-12">
+      <form>
+        <input [(ngModel)]="searchValue" class="searchBox" placeholder="Search Movies" autocomplete="off" name="searchValue" type="text">
+        <button (click)="getMovies()" name="submit"><img src="/assets/lupa.png" alt=""></button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="loading==false">
+    <div class="row">
+      <div class="col-md-12">
+        <app-seleton-loader [Cwidth]=100 [Cheigth]=30></app-seleton-loader>
+      </div>
+      <div class="col-md-8">
+        <span><app-seleton-loader [Cwidth]=80 [Cheigth]=30></app-seleton-loader></span>
+        <h1><app-seleton-loader [Cwidth]=100000 [Cheigth]=80></app-seleton-loader></h1>
+        <p>
+          <app-seleton-loader [Cwidth]=40 [Cheigth]=30></app-seleton-loader>
+        </p>
+        <div class="resume">
+          <app-seleton-loader [Cwidth]=40 [Cheigth]=30></app-seleton-loader>
+          <app-seleton-loader [Cwidth]=10000 [Cheigth]=300></app-seleton-loader>
+        </div>
+      </div>
+      <div class="col-md-4 movieFeatured">
+        <app-seleton-loader [Cwidth]=300 [Cheigth]=500></app-seleton-loader>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h2><app-seleton-loader [Cwidth]=100 [Cheigth]=30></app-seleton-loader></h2>
+        <ul class="row moviesResults">
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+          <li class="col-md-2 col-6">
+            <app-seleton-loader [Cwidth]=10000 [Cheigth]=250></app-seleton-loader>
+            <h2><app-seleton-loader [Cwidth]=10000 [Cheigth]=40></app-seleton-loader></h2>
+            <p><app-seleton-loader [Cwidth]=40 [Cheigth]=20></app-seleton-loader></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="singleMovie !== null && singleMovie.Response === 'True' && loading == true" class="row">
+    <div class="col-12">
+      <h2>Featured</h2>
+    </div>
+    <div class="col-md-8">
+      <span>{{singleMovie.Runtime}} • {{singleMovie.Year}}</span>
+      <h1>{{singleMovie.Title}}</h1>
+      <p>
+        <img src="/assets/rate.png" alt="Rate" title="Rate"> {{singleMovie.imdbRating}}
+      </p>
+      <div class="resume">
+        <span>Plot</span>
+        <p>{{singleMovie.Plot}}</p>
+      </div>
+    </div>
+    <div class="col-md-4 movieFeatured">
+      <img [src]="[singleMovie.Poster !== 'N/A' ? singleMovie.Poster : '/assets/noimage.jpg']" alt={{singleMovie.Title}} title={{singleMovie.Title}}>
+    </div>
+  </div>
+  <div *ngIf="moviesSearchResult!= null && moviesSearchResult.Response === 'True'" class="row">
+    <div class="col-12">
+      <h2>More Results</h2>
+      <ul class="row moviesResults">
+        <li *ngFor="let item of moviesSearchResult.Search" class="col-md-2 col-6">
+          <img [src]="[item.Poster !== 'N/A' ? item.Poster : '/assets/noimage.jpg']" title={{item.Title}} alt={{item.Title}} class="img-fluid" />
+          <h2>{{item.Title}}</h2>
+          <p>Ano: {{item.Year}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="singleMovie!=null && singleMovie.Response === 'False'">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>No movies were found</h2>
+      </div>
+    </div>
+  </div>
+</div>
